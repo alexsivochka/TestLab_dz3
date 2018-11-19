@@ -5,6 +5,7 @@ import admin.pages.CategoryPage;
 import admin.pages.LoginPage;
 import admin.pages.MainPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.Assert;
@@ -18,6 +19,8 @@ public class TestRunner {
     LoginPage loginPage;
     MainPage mainPage;
     CategoryPage categoryPage;
+
+    String newCategory = "Test Category_".concat(RandomStringUtils.randomNumeric(3));
 
     @BeforeClass
     public EventFiringWebDriver getConfiguredDriver() {
@@ -40,8 +43,8 @@ public class TestRunner {
         Assert.assertTrue(mainPage.checkLogoDisplay());
         mainPage.goToCategoryPage();
         categoryPage = new CategoryPage(driver);
-        categoryPage.addCategory("Test category");
-        categoryPage.findCategory("Test category");
+        categoryPage.addCategory(newCategory);
+        categoryPage.findCategory(newCategory);
 
     }
     @AfterClass
